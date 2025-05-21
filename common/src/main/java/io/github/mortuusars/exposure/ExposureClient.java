@@ -37,7 +37,7 @@ public class ExposureClient {
     private static final PhotographRenderer PHOTOGRAPH_RENDERER = new PhotographRenderer();
 
     public static void init() {
-        CameraModelPoses.register(Exposure.Items.CAMERA.get(), new CameraPoses());
+        CameraModelPoses.register(Exposure.Items.CAMERA.get(), new CameraPoses<>());
 
         ViewfinderRegistry.register(Exposure.Items.CAMERA.get(), Viewfinder::new);
 
@@ -132,7 +132,9 @@ public class ExposureClient {
     public static class Models {
         public static final Set<ModelResourceLocation> MODELS = new HashSet<>();
 
-        public static final ModelResourceLocation CAMERA_GUI = register("item/camera_gui");
+        public static final ModelResourceLocation CAMERA_GUI =
+                new ModelResourceLocation(Exposure.resource("camera_gui"), ModelResourceLocation.INVENTORY_VARIANT);
+
         public static final ModelResourceLocation CAMERA_ACTIVE = register("item/camera_active");
         public static final ModelResourceLocation CAMERA_SELFIE = register("item/camera_selfie");
         public static final ModelResourceLocation CAMERA_VIEWFINDER = register("item/camera_parts/viewfinder");
@@ -141,14 +143,14 @@ public class ExposureClient {
         public static final ModelResourceLocation CAMERA_SELFIE_STICK = register("item/camera_parts/selfie_stick");
         public static final ModelResourceLocation SELFIE_STICK = register("item/selfie_stick");
 
-        public static final ModelResourceLocation PHOTOGRAPH_FRAME_SMALL = register("block/photograph_frame_small");
-        public static final ModelResourceLocation PHOTOGRAPH_FRAME_MEDIUM = register("block/photograph_frame_medium");
-        public static final ModelResourceLocation PHOTOGRAPH_FRAME_LARGE = register("block/photograph_frame_large");
-        public static final ModelResourceLocation CLEAR_PHOTOGRAPH_FRAME_SMALL = register("block/glass_photograph_frame_small");
-        public static final ModelResourceLocation CLEAR_PHOTOGRAPH_FRAME_MEDIUM = register("block/glass_photograph_frame_medium");
-        public static final ModelResourceLocation CLEAR_PHOTOGRAPH_FRAME_LARGE = register("block/glass_photograph_frame_large");
-        public static final ModelResourceLocation CAMERA_STAND = register("block/camera_stand");
-        public static final ModelResourceLocation CAMERA_STAND_MOUNT = register("block/camera_stand_mount");
+        public static final ModelResourceLocation PHOTOGRAPH_FRAME_SMALL = register("photograph_frame_small");
+        public static final ModelResourceLocation PHOTOGRAPH_FRAME_MEDIUM = register("photograph_frame_medium");
+        public static final ModelResourceLocation PHOTOGRAPH_FRAME_LARGE = register("photograph_frame_large");
+        public static final ModelResourceLocation CLEAR_PHOTOGRAPH_FRAME_SMALL = register("glass_photograph_frame_small");
+        public static final ModelResourceLocation CLEAR_PHOTOGRAPH_FRAME_MEDIUM = register("glass_photograph_frame_medium");
+        public static final ModelResourceLocation CLEAR_PHOTOGRAPH_FRAME_LARGE = register("glass_photograph_frame_large");
+        public static final ModelResourceLocation CAMERA_STAND = register("camera_stand");
+        public static final ModelResourceLocation CAMERA_STAND_MOUNT = register("camera_stand_mount");
 
         public static ModelResourceLocation register(String path) {
             ModelResourceLocation location = new ModelResourceLocation(Exposure.resource(path), "standalone");

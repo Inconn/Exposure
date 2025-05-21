@@ -25,6 +25,8 @@
     "client.MinecraftMixin",
     "client.MouseHandlerMixin",
     "client.MultiPlayerGameModeMixin",
+    "client.LivingEntityRendererMixin",
+    "client.PlayerRenderStateMixin",
     "compat.easy_anvils.ModAnvilScreenMixin"
   ],
   "mixins": [

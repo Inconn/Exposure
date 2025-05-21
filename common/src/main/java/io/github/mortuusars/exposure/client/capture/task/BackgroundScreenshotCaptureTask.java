@@ -17,6 +17,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
 import net.minecraft.client.renderer.PostChain;
 import org.jetbrains.annotations.NotNull;
+import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -49,9 +50,9 @@ public class BackgroundScreenshotCaptureTask extends Task<Result<Image>> {
         Minecraft minecraft = Minecrft.get();
 
         renderTarget = new TextureTarget(minecraft.getWindow().getWidth(),
-                minecraft.getWindow().getHeight(), true, Minecraft.ON_OSX);
+                minecraft.getWindow().getHeight(), true);
         renderTarget.setClearColor(0.0F, 0.0F, 0.0F, 0.0F);
-        renderTarget.clear(Minecraft.ON_OSX);
+        renderTarget.clear();
 
         try {
             capturing = true;
@@ -64,9 +65,9 @@ public class BackgroundScreenshotCaptureTask extends Task<Result<Image>> {
 
             minecraft.gameRenderer.setRenderBlockOutline(false);
 
-            minecraft.levelRenderer.graphicsChanged();
+            //minecraft.levelRenderer.graphicsChanged();
             renderTarget.bindWrite(false);
-            minecraft.gameRenderer.renderLevel(minecraft.getTimer());
+            minecraft.gameRenderer.renderLevel(minecraft.getDeltaTracker());
 
             applyShaderEffects(renderTarget);
 
@@ -85,13 +86,13 @@ public class BackgroundScreenshotCaptureTask extends Task<Result<Image>> {
             renderTarget.unbindWrite();
             renderTarget = null;
             capturing = false;
-            minecraft.levelRenderer.graphicsChanged();
+            //minecraft.levelRenderer.graphicsChanged();
             minecraft.getMainRenderTarget().bindWrite(true);
         }
     }
 
     private void applyShaderEffects(RenderTarget renderTarget) {
-        @Nullable PostChain effect = Minecraft.getInstance().gameRenderer.currentEffect();
+        @Nullable ResourceLocation effect = Minecraft.getInstance().gameRenderer.currentPostEffect();
         if (effect != null && Minecraft.getInstance().gameRenderer.effectActive) {
             Shader.process(effect, renderTarget);
         }

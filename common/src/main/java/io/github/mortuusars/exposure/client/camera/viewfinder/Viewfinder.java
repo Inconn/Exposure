@@ -127,10 +127,6 @@ public class Viewfinder {
     }
 
     public void close() {
-        if (shader != null) {
-            shader.close();
-        }
-
         if (controlsActive()) {
             Minecrft.get().setScreen(null);
         }
