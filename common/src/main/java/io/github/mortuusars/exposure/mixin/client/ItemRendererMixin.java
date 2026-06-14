@@ -5,7 +5,6 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
 import io.github.mortuusars.exposure.Exposure;
 import io.github.mortuusars.exposure.ExposureClient;
-import io.github.mortuusars.exposure.PlatformHelperClient;
 import io.github.mortuusars.exposure.client.render.model.CameraModel;
 import io.github.mortuusars.exposure.client.util.Minecrft;
 import net.minecraft.client.Minecraft;
@@ -25,6 +24,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
+import java.util.Objects;
+
 @Mixin(ItemRenderer.class)
 public abstract class ItemRendererMixin {
     @Shadow @Final private ModelManager modelManager;
@@ -36,8 +37,8 @@ public abstract class ItemRendererMixin {
         if (!stack.is(Exposure.Items.CAMERA.get())) return model;
 
         if (displayContext == ItemDisplayContext.GUI) {
-            BakedModel guiModel = PlatformHelperClient.getModel(ExposureClient.Models.CAMERA_GUI);
-            return guiModel.getOverrides().resolve(guiModel, stack, Minecrft.level(), Minecrft.player(), 0);
+            BakedModel guiModel = this.modelManager.getModel(ExposureClient.Models.CAMERA_GUI);
+            return Objects.requireNonNullElse(guiModel.overrides().findOverride(stack, Minecrft.level(), Minecrft.player(), 0), guiModel);
         }
 
         return model;

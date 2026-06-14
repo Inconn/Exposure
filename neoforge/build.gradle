@@ -58,11 +58,11 @@ dependencies {
     //modRuntimeOnly("maven.modrinth:refined-storage:lHHiI26k")
 
     // Create
-    //implementation("com.simibubi.create:create-1.21.1:${create_version}:slim") { transitive = false }
-    //implementation("net.createmod.ponder:Ponder-NeoForge-1.21.1:${ponder_version}")
-    //compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-1.21.1:${flywheel_version}")
+    compileOnly("com.simibubi.create:create-1.21.1:${create_version}:slim") { transitive = false }
+    compileOnly("net.createmod.ponder:Ponder-NeoForge-1.21.1:${ponder_version}")
+    compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-1.21.1:${flywheel_version}")
     //runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-1.21.1:${flywheel_version}")
-    //implementation("com.tterrag.registrate:Registrate:${registrate_version}")
+    compileOnly("com.tterrag.registrate:Registrate:${registrate_version}")
 
     //runtimeOnly("curse.maven:refined-storage-243076:6391989")
     //runtimeOnly("maven.modrinth:DistantHorizons:2.3.0-b-1.21.3")

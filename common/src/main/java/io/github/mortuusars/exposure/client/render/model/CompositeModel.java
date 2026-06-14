@@ -1,7 +1,7 @@
 package io.github.mortuusars.exposure.client.render.model;
 
+import net.minecraft.client.renderer.block.model.BakedOverrides;
 import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
@@ -68,7 +68,7 @@ public class CompositeModel implements BakedModel {
     }
 
     @Override
-    public @NotNull ItemOverrides getOverrides() {
-        return models.getFirst().getOverrides();
+    public @NotNull BakedOverrides overrides() {
+        return models.getFirst().overrides();
     }
 }

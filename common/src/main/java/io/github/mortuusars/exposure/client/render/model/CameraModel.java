@@ -14,6 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CameraModel {
     /**
@@ -58,7 +59,7 @@ public class CameraModel {
 
     private static BakedModel getModelWithOverrides(ModelResourceLocation location, ItemStack stack,
                                                     @Nullable ClientLevel level, @Nullable LivingEntity entity, int seed) {
-        BakedModel model = PlatformHelperClient.getModel(location);
-        return model.getOverrides().resolve(model, stack, level, entity, seed);
+        BakedModel model = Minecrft.get().getModelManager().getModel(location);
+        return Objects.requireNonNullElse(model.overrides().findOverride(stack, level, entity, seed), model);
     }
 }
